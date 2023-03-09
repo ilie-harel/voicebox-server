@@ -14,7 +14,7 @@ const pool = mysql.createPool({
     port: 3306,
     database: process.env.DB_NAME,
     ssl: {
-        ca: fs.readFileSync('C:\\Users\\ilieb\\OneDrive\\Desktop\\ssl\\BaltimoreCyberTrustRoot.crt.pem')
+        ca: fs.readFileSync('C:/Users/ilieb/OneDrive/Desktop/ssl/BaltimoreCyberTrustRoot.crt.pem')
     }
 });
 
