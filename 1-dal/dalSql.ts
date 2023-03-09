@@ -1,5 +1,6 @@
 import mysql, { RowDataPacket } from 'mysql2/promise';
 import fs from 'fs'
+import path from 'path'
 import * as dotenv from 'dotenv';
 
 dotenv.config({ path: process.env.NODE_ENV === 'dev' ? '.env.dev' : '.env.prod' })
@@ -13,8 +14,8 @@ const pool = mysql.createPool({
     password: process.env.DB_PASSWORD,
     port: 3306,
     database: process.env.DB_NAME,
-    ssl:{
-        ca: fs.readFileSync('./BaltimoreCyberTrustRoot.crt.pem')
+    ssl: {
+        ca: fs.readFileSync(path.resolve('/BaltimoreCyberTrustRoot.crt.pem'))
     }
 });
 
