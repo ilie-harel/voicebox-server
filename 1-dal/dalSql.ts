@@ -1,4 +1,5 @@
 import mysql, { RowDataPacket } from 'mysql2/promise';
+import fs from 'fs'
 import * as dotenv from 'dotenv';
 
 dotenv.config({ path: process.env.NODE_ENV === 'dev' ? '.env.dev' : '.env.prod' })
@@ -11,7 +12,10 @@ const pool = mysql.createPool({
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     port: 3306,
-    database: process.env.DB_NAME
+    database: process.env.DB_NAME,
+    ssl:{
+        ca: fs.readFileSync('./BaltimoreCyberTrustRoot.crt.pem')
+    }
 });
 
 export async function execute<T>(query: string, params?: any[]) {
