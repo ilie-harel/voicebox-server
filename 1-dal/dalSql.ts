@@ -13,9 +13,6 @@ const pool = mysql.createPool({
     password: process.env.DB_PASSWORD,
     port: 3306,
     database: process.env.DB_NAME,
-    ssl: {
-        ca: fs.readFileSync('C:/Users/Username/Desktop/BaltimoreCyberTrustRoot.crt.pem')
-    }
 });
 
 export async function execute<T>(query: string, params?: any[]) {
