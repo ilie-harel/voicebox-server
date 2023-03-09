@@ -23,6 +23,7 @@
     "jsonwebtoken": "^9.0.0",
     "mysql2": "^3.1.2",
     "openai": "^3.2.1",
+    "ts-node": "^10.9.1",
     "unfetch": "^5.0.0"
   },
   "devDependencies": {
