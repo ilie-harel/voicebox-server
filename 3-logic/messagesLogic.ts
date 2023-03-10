@@ -9,7 +9,7 @@ export async function saveUserMessages(message: string, id: string, roomId: numb
 }
 
 export async function getMessagesByRoomAndUserId(roomId: number, userId: number): Promise<any> {    
-    const query = `SELECT * FROM ai.messages WHERE roomId = ? AND userId = ? ORDER BY timestamp ASC`;
+    const query = `SELECT * FROM messages WHERE roomId = ? AND userId = ? ORDER BY timestamp ASC`;
     const [results]: any = await execute<OkPacket>(query, [roomId, userId]);
     return results;
 }
