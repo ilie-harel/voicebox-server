@@ -6,14 +6,24 @@ export const GoogleUsersRoute = express.Router();
 
 GoogleUsersRoute.post('/google/auth', async (req, res) => {
     const user = req.body;
+    const notComputer = req.query.notComputer
     try {
         const results = await googleRegister(user)
         if (results[0] === false) {
-            user.id = results[1]
-            user.language = results[2]
-            user.voiceGender = results[3]
-            const token = await generateToken(user)
-            res.status(200).json(token);
+            if (notComputer === 'true') {
+                user.id = results[1]
+                user.language = 'en'
+                user.voiceGender = results[3]
+                const token = await generateToken(user)
+                res.status(200).json(token);
+                return;
+            } else {
+                user.id = results[1]
+                user.language = results[2]
+                user.voiceGender = results[3]
+                const token = await generateToken(user)
+                res.status(200).json(token);
+            }
             return;
         }
         user.id = results
