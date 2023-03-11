@@ -27,3 +27,9 @@ export async function changeUserLanguage(id: number, language: string, gender: s
     const results = await execute<OkPacket>(query, [language, gender, id]);
     return results
 }
+
+export async function getEmailNotify(email:string){
+    const query = 'INSERT INTO phonenotify(email) VALUES (?)'
+    const results = await execute<OkPacket>(query,[email])
+    return results;
+}

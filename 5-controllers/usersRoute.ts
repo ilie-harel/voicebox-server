@@ -1,7 +1,7 @@
 import express from 'express';
 import { hashedPassword } from '../1-dal/hashedPssword';
 import { generateToken, getDetailsFromToken } from '../1-dal/jwt';
-import { changeUserLanguage, getAllUsers, register } from '../3-logic/userLogic';
+import { changeUserLanguage, getAllUsers, getEmailNotify, register } from '../3-logic/userLogic';
 import { UserModel } from '../4-model/usersModel';
 
 
@@ -61,6 +61,16 @@ UserRoute.put('/users/language', async (req, res) => {
         const newToken = await generateToken(updatedUser)        
         res.status(200).json(newToken);
     } catch (e) {
+        res.status(401).json(e)
+    }
+})
+
+UserRoute.post('/users/notify',async (req,res)=>{
+    const email = req.query.email;
+    try{
+        const results = await getEmailNotify(String(email));
+        res.status(200).json(results);
+    }catch(e){
         res.status(401).json(e)
     }
 })
